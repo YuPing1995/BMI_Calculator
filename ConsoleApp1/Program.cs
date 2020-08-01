@@ -11,17 +11,17 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            string gender = "";
+            string animalType = "";
             double height = 0;
             double weight = 0;
-
+           
         start:
             while (true)
             {
-                Console.Write("請輸入性別(男M / 女F)：");
-                gender = Console.ReadKey().Key.ToString();
+                Console.Write("請輸入動物類別 (如：男M / 女F / 貓C)：");
+                animalType = Console.ReadKey().Key.ToString();
                 Console.WriteLine();
-                if (gender != "M" && gender != "F")
+                if (animalType != "M" && animalType != "F" && animalType != "C")
                 {
                     Console.WriteLine("格式錯誤，請重新輸入");
                 }
@@ -45,7 +45,6 @@ namespace ConsoleApp1
                 }
             }
 
-
             while (true)
             {
                 Console.Write("請輸入體重(kg)：");
@@ -61,23 +60,20 @@ namespace ConsoleApp1
                 }
             }
 
-            double BMI = weight / ((height * 0.01) * (height * 0.01));
 
-            Console.WriteLine($"BMI為：{BMI}");
 
-            switch (gender)
-            {
-                case "M":
-                    if (BMI > 25) Console.WriteLine("太胖！");
-                    else if (BMI > 20) Console.WriteLine("適中");
-                    else Console.WriteLine("太瘦");
-                    break;
+            Animal animal = new Man(height, weight); 
+            switch (animalType)
+            {                
                 case "F":
-                    if (BMI > 22) Console.WriteLine("太胖！");
-                    else if (BMI > 18) Console.WriteLine("適中");
-                    else Console.WriteLine("太瘦");
+                    animal = new Woman(height, weight);
+                    break;
+                case "C":
+                    animal = new Cat(height, weight);
                     break;
             }
+            Console.WriteLine($" BMI值：{animal.bmi}, 計算結果：{animal.GetBmiResult()}");
+
 
             Console.Write("輸入r重新開始，輸入r以外的鍵結束程式：");
             string restart = Console.ReadKey().Key.ToString();
